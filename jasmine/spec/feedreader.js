@@ -68,11 +68,25 @@ $(function() {
              expect(bodyclass).toBe('menu-hidden');
         });
 
-         /* TODO: Write a test that ensures the menu changes
+         /* Test that ensures the menu changes
           * visibility when the menu icon is clicked. This test
-          * should have two expectations: does the menu display when
-          * clicked and does it hide when clicked again.
+          * have two expectations: the menu display when
+          * clicked and it hide when clicked again.
           */
+        it('Muda a visibilidade ao ser clicado', function(){
+            var iconeMenu = $('.menu-icon-link');
+            var body = $('body');
+            var bodyclass;
+
+            iconeMenu.click();
+            bodyclass = $('body').attr('class');
+            expect(bodyclass).not.toBe('menu-hidden');
+
+            iconeMenu.click();
+            bodyclass = $('body').attr('class');
+            expect(bodyclass).toBe('menu-hidden');
+
+        });
     });
 
 
