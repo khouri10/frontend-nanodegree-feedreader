@@ -64,8 +64,8 @@ $(function() {
          * hidden by default.
          */
         it('Está escondido por padrão', function() {
-             var bodyclass = $('body').attr('class');
-             expect(bodyclass).toBe('menu-hidden');
+             var bodyclass = $('body').hasClass('menu-hidden');
+             expect(bodyclass).toBe(true);
         });
 
          /* Test that ensures the menu changes
@@ -79,12 +79,12 @@ $(function() {
             var bodyclass;
 
             iconeMenu.click();
-            bodyclass = $('body').attr('class');
-            expect(bodyclass).not.toBe('menu-hidden');
+            bodyclass = $('body').hasClass('menu-hidden');
+            expect(bodyclass).toBe(false);
 
             iconeMenu.click();
-            bodyclass = $('body').attr('class');
-            expect(bodyclass).toBe('menu-hidden');
+            bodyclass = $('body').hasClass('menu-hidden');
+            expect(bodyclass).toBe(true);
 
         });
     });
@@ -107,7 +107,7 @@ $(function() {
 
         it('Contém pelo menos uma entrada', function(done) {
         
-            var entry = $('.entry').html();
+            var entry = $('.feed .entry').html();
             expect(entry).toBeDefined();
             done();
             
@@ -121,13 +121,15 @@ $(function() {
          * by the loadFeed function that the content actually changes.
          * Remember, loadFeed() is asynchronous.
          */
-        var feed0;
+        var feed0,
+            feed1;
 
         beforeEach(function(done) {
             loadFeed(0, function() {
                 feed0 = $('.feed').html();
 
                 loadFeed(1, function(){
+                    feed1 = $('.feed').html();
                     done();
                 });
                 
@@ -136,7 +138,6 @@ $(function() {
 
         it('Conteúdo do feed muda', function(done) {
         
-            var feed1 = $('.feed').html();
             expect(feed1).not.toBe(feed0);
             done();
             
